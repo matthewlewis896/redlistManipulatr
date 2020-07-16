@@ -22,7 +22,7 @@ RL_subset_acceptable <-
     }
 
     cols_to_check <-
-      NatureMapRedList::hab_col_positions() %>%
+      hab_col_positions() %>%
       unlist() %>%
       sort()
 

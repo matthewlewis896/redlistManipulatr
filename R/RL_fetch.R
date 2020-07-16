@@ -30,7 +30,7 @@ RL_fetch <-
 
     # Checking needed packages are installed.
 
-    NatureMapRedList::packTest("rredlist")
+    packTest("rredlist")
 
     # Testing if API key is valid.
     if(is.character(key) == F){

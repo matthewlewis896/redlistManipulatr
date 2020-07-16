@@ -7,7 +7,7 @@
 
 hab_col_positions <-
   function(
-    x = NatureMapRedList::wideform()
+    x = wideform()
   ){
     cols_to_check <- which(colnames(x) == "iucn_1"):length(x)
     level1_cols <-

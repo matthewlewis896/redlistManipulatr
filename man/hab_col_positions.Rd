@@ -4,7 +4,7 @@
 \alias{hab_col_positions}
 \title{Level 1 and Level2 habitat column positions}
 \usage{
-hab_col_positions(x = NatureMapRedList::wideform())
+hab_col_positions(x = wideform())
 }
 \arguments{
 \item{x}{Dataframe with column names in the form iucn_n or iucn_n_n where n is an integer habitat code}

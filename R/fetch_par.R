@@ -37,14 +37,14 @@ fetch_par <-
     }
 
     cols_to_check <-
-      NatureMapRedList::hab_col_positions() %>%
+      hab_col_positions() %>%
       unlist() %>%
       sort()
 
     invisible(
       lapply(
         c("parallel", "snow", "doSNOW"),
-        NatureMapRedList::packTest
+        packTest
       )
     )
 
@@ -56,7 +56,7 @@ fetch_par <-
     doSNOW::registerDoSNOW(cl)
     on.exit(snow::stopCluster(cl))
 
-    temp_df <- NatureMapRedList::wideform()
+    temp_df <- wideform()
     seasons <- NatureMapRedList::seasons
     suitability <- NatureMapRedList::suitability
     major_importance <- NatureMapRedList::major_importance

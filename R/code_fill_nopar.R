@@ -23,7 +23,7 @@ code_fill_nopar <-
       pb = txtProgressBar(min = 0, max = subset, initial = 0, style = 3)
     }
 
-    hab_cols <- NatureMapRedList::hab_col_positions()
+    hab_cols <- hab_col_positions()
     cols_to_check <- as.vector(sort(unlist(hab_cols)))
 
     pref_order <- NatureMapRedList::suitability_ordered

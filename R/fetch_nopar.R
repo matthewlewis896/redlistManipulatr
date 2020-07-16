@@ -27,7 +27,7 @@ fetch_nopar <-
     suitability <- NatureMapRedList::suitability
     major_importance <- NatureMapRedList::major_importance
     cols_to_check <-
-      NatureMapRedList::hab_col_positions() %>%
+      hab_col_positions() %>%
       unlist() %>%
       sort()
 
