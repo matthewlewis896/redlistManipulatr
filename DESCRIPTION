@@ -23,3 +23,5 @@ Imports:
     foreach,
     utils,
     tidyr
+URL: https://github.com/matthewlewis896/NatureMapRedList
+BugReports: https://github.com/matthewlewis896/NatureMapRedList/issues
