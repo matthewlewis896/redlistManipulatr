@@ -59,7 +59,7 @@ RL_season_subset <-
     }
 
     cols_to_check <-
-      NatureMapRedList::hab_col_positions() %>%
+      hab_col_positions() %>%
       unlist() %>%
       sort()
 

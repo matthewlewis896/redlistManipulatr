@@ -14,7 +14,7 @@ RL_col_rename <-
       NatureMapRedList::hab_conversion_lut
 
     cols_to_check <-
-      NatureMapRedList::hab_col_positions() %>%
+      hab_col_positions() %>%
       unlist() %>%
       sort()
 

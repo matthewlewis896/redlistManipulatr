@@ -17,7 +17,7 @@ RL_reformat_long <-
       stop("Please supply a valid value for 'na.rm'.")
     }
 
-    NatureMapRedList::packTest("tidyr")
+    packTest("tidyr")
 
     habitats <- NatureMapRedList::habitats
     seasons <- NatureMapRedList::seasons
@@ -28,7 +28,7 @@ RL_reformat_long <-
       x %>%
       tidyr::pivot_longer(
         cols =
-          NatureMapRedList::hab_col_positions() %>%
+          hab_col_positions() %>%
           unlist() %>%
           sort(),
         names_to = "level_3",

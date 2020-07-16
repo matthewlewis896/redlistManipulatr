@@ -36,7 +36,7 @@ code_fill_par <-
     }
 
     invisible(lapply(c("parallel", "snow", "doSNOW"),
-                     NatureMapRedList::packTest
+                     packTest
                      )
     )
 
