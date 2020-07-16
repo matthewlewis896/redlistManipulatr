@@ -1,27 +1,28 @@
 Package: NatureMapRedList
-Title: What the Package Does (One Line, Title Case)
+Title: Obtain Red List data in useful formats for Nature Map.
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Matthew",
+           family = "Lewis",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "matthewlewis896@gmail.com",
+           comment = c(ORCID = "0000-0003-2244-4078"))
+Description: A collection of functions used to pull and manipulate IUCN Red List habitat and elevation data used in Nature Map v1.
+License: MIT + file LICENSE
 Encoding: UTF-8
+Language: en-GB
 LazyData: true
+Licence: MIT
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Imports: 
+    rredlist,
+    magrittr,
     parallel,
     snow,
     doSNOW,
-    rredlist,
-    magrittr,
-    foreach,
-    utils,
     tidyr
-URL: https://github.com/matthewlewis896/NatureMapRedList
-BugReports: https://github.com/matthewlewis896/NatureMapRedList/issues
+Suggests: 
+    covr,
+    testthat,
+    spelling
