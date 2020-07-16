@@ -76,7 +76,8 @@ RL_subset_acceptable <-
         }
         x[i, cols_to_check] <- vals
       }
-      if(na.rm == TRUE){
+      if(na.rm == TRUE &
+         length(rows_to_remove) >0L){
         x <- x[-rows_to_remove,]
       }
     }

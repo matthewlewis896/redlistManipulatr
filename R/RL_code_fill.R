@@ -53,7 +53,7 @@ RL_code_fill <-
       stop("Please supply a valid value for 'subset'. 'subset' should be between 0 and 1.")
     }else{
       subset <- round(subset * nrow(x))
-      message("\nFetching data for a subset of ", subset, "/", nrow(x), " (", round((100*subset/nrow(x)),2), "%) of the data.")
+      message("\nManipulating data for a subset of ", subset, "/", nrow(x), " (", round((100*subset/nrow(x)),2), "%) of the data.")
     }
 
 

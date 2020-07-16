@@ -46,7 +46,7 @@ code_fill_par <-
     doSNOW::registerDoSNOW(cl)
     on.exit(snow::stopCluster(cl))
 
-    hab_cols <- NatureMapRedList::hab_col_positions()
+    hab_cols <- hab_col_positions()
     cols_to_check <- as.vector(sort(unlist(hab_cols)))
 
     pref_order <- NatureMapRedList::suitability_ordered

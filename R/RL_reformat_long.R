@@ -47,16 +47,16 @@ RL_reformat_long <-
     vals <-
       df$suitability %>%
       lapply(.,
-             function(x){
-               if(!is.na(x)){
-                 x <-
-                   x %>%
+             function(y){
+               if(!is.na(y)){
+                 y <-
+                   y %>%
                    strsplit("") %>%
                    unlist()
-                 maj_imp <- x[length(x)]
-                 suit <- x[1:(length(x)-1)]
+                 maj_imp <- y[length(y)]
+                 suit <- y[1:(length(y)-1)]
 
-                 x <-
+                 y <-
                    c(
                      suit,
                      maj_imp
