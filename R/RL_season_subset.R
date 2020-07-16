@@ -32,7 +32,7 @@ RL_season_subset <-
     }else if(query =="name"){
       query = "binomial"
     }else{
-      query = iucn_id
+      query = "iucn_id"
     }
 
     if(is.na(species.col.name)){
@@ -59,7 +59,7 @@ RL_season_subset <-
     }
 
     cols_to_check <-
-      hab_col_positions() %>%
+      NatureMapRedList::hab_col_positions() %>%
       unlist() %>%
       sort()
 

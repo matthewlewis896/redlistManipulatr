@@ -4,7 +4,7 @@
 \alias{\%do\%}
 \title{\%do\% operator}
 \usage{
-lhs \%do\% rhs
+obj \%do\% ex
 }
 \description{
 \%do\% operator

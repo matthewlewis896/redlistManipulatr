@@ -22,10 +22,14 @@ fetch_nopar <-
 
 
 
-    temp_df <- NatureMapRedList::wideform()
+    temp_df <- wideform()
     seasons <- NatureMapRedList::seasons
     suitability <- NatureMapRedList::suitability
     major_importance <- NatureMapRedList::major_importance
+    cols_to_check <-
+      NatureMapRedList::hab_col_positions() %>%
+      unlist() %>%
+      sort()
 
     if(verbose == 1){
       pb = txtProgressBar(min = 0, max = subset, initial = 0, style = 3)
@@ -126,7 +130,7 @@ fetch_nopar <-
         }else{
           df<-df[1,]
           df[,2]=999
-          df[,unlist(parent_columns)[1]:unlist(parent_columns)[length(unlist(parent_columns))]] <-
+          df[,cols_to_check] <-
             66
         }
 
@@ -137,7 +141,7 @@ fetch_nopar <-
           elevation <- rredlist::rl_search(name = species, key = key)
         } else if (query == "ID") {
           elevation <-
-            rredlist::rl_search(id = as.numeric(as.character(species)), key = iucn_api_key)
+            rredlist::rl_search(id = as.numeric(as.character(species)), key = key)
         }
         if(length(elevation$result)>0){
           df$iucn_id = as.numeric(as.character(elevation$result$taxonid[1]))

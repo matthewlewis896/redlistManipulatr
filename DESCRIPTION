@@ -1,5 +1,5 @@
 Package: NatureMapRedList
-Title: Obtain Red List data in useful formats for Nature Map.
+Title: Obtain Red List data in useful formats for Nature Map
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Matthew",
@@ -19,10 +19,9 @@ Imports:
     rredlist,
     magrittr,
     parallel,
+    foreach,
     snow,
     doSNOW,
-    tidyr
-Suggests: 
-    covr,
-    testthat,
-    spelling
+    tidyr,
+    utils,
+    stats

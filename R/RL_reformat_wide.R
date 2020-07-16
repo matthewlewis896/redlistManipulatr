@@ -10,7 +10,7 @@ RL_reformat_wide <-
   function(
     x
   ){
-    base_df <- wideform()
+    base_df <- NatureMapRedList::wideform()
 
     x<- x[!is.na(x$suitability),]
 

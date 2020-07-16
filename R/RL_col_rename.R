@@ -11,10 +11,10 @@ RL_col_rename <-
     x
   ){
     lut <-
-      hab_conversion_lut
+      NatureMapRedList::hab_conversion_lut
 
     cols_to_check <-
-      hab_col_positions() %>%
+      NatureMapRedList::hab_col_positions() %>%
       unlist() %>%
       sort()
 

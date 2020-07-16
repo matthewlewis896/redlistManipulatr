@@ -5,5 +5,5 @@
 #' @keywords internal
 #' @export
 #' @importFrom foreach %dopar%
-#' @usage lhs \%dopar\% rhs
+#' @usage obj \%dopar\% ex
 NULL

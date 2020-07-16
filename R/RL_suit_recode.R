@@ -11,7 +11,7 @@ RL_suit_recode <-
     x
   ){
     cols_to_check <-
-      hab_col_positions() %>%
+      NatureMapRedList::hab_col_positions() %>%
       unlist() %>%
       sort()
     for(i in 1:nrow(x)){

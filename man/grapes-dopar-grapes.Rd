@@ -4,7 +4,7 @@
 \alias{\%dopar\%}
 \title{\%dopar\% operator}
 \usage{
-lhs \%dopar\% rhs
+obj \%dopar\% ex
 }
 \description{
 \%dopar\% operator
