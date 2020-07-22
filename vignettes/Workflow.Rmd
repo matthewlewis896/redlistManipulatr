@@ -125,18 +125,38 @@ Additional parameters `subset`, `parallel`, `num.cores`, and `verbose` operate t
 
 See `?RL_code_fill()` for more details.
 
-### Recoding NA seasons or habitat suitabilities
+### Recoding missing habitat suitabilities and seasons
 
 Some species have seasonal occurrence for a particular habitat missing on the Red List, or else have habitat suitability missing. In these cases, `RL_fetch()` pulls down this data as `999`. This behaviour may not be desired, and the functions `RL_season_recode()` and `RL_suit_recode()` exist to recode these values.
 
+`RL_suit_recode()` recodes `999` habitat suitabilities as 'Suitable', giving a code of `3` (see the `suitability` data).
+
 `RL_season_recode()` recodes `999` seasons as 'Resident', giving a code of `1` (see the `seasons` data).
 
-`RL_suit_recode()` recodes `999` habitat suitabilities as 'Suitable', giving a code of `3` (see the `suitability` data).
+As `RL_season_recode()` may cause multiple rows for Resident seasons (e.g. if a species has data that is both Resident and missing for season), the parameter `combine.rows` allows combining of these rows. In the case of both rows having suitability values for a habitat, the highest ranked suitability-major importance combination is selected, see `suitability_ordered` for this ranking. As a result, it is recommended to run `RL_suit_recode()` before `RL_season_recode()` if both are required, as `999` habitats are low priority. `combine.rows` defaults to `FALSE`.
+
+`combine.rows = FALSE`: 
 
 ``` {r}
 df3 <-
   RL_season_recode(
-    x = df2
+    x = df2,
+    combine.rows = FALSE
+  )
+```
+
+``` {r echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df3[,1:18])
+
+```
+
+`combine.rows = TRUE`: 
+``` {r}
+df3 <-
+  RL_season_recode(
+    x = df2,
+    combine.rows = TRUE
   )
 ```
 
@@ -238,7 +258,7 @@ pander::pandoc.table(df6[,1:18])
 
 Thus far we have dealt only with wide-format data (one column per habitat type), but sometimes long-format data (one row per habitat type) can be useful.
 
-`RL_reformat_long()` deals with this and can be used at any stage of the process prior to *Making Ready for Google Earth Engine* (i.e. before use of `RL_GEE_ready()`). `x` is the input `dataframe`, while `na.rm` allows you to remove rows with habitats that have no suitability information. This defaults to `TRUE`.
+`RL_reformat_long()` deals with this and can be used at any stage of the process prior to **Making Ready for Google Earth Engine** (i.e. before use of `RL_GEE_ready()`). `x` is the input `dataframe`, while `na.rm` allows you to remove rows with habitats that have no suitability information. This defaults to `TRUE`.
 
 ``` {r}
 df7 <-

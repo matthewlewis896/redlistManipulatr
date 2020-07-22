@@ -96,7 +96,7 @@ RL_season_subset <-
                        }) %>%
                 unlist() %>%
                 which.min()
-              temp[1, j] <- best_val
+              temp[1, j] <- vals[best_val]
             }
           }
         }else{

@@ -4,10 +4,12 @@
 \alias{RL_season_recode}
 \title{Recode NA seasons to Resident}
 \usage{
-RL_season_recode(x)
+RL_season_recode(x, combine.rows = FALSE)
 }
 \arguments{
 \item{x}{A wide format dataframe with one column per habitat category. As output by RL_fetch().}
+
+\item{combine.rows}{(optional) Logical. If a species ends up with multiple rows for a season due to recoding, should these rows be combined? If TRUE selects the highest ranked suitability-major importance combination. See \code{suitability_ordered}.Defaults to FALSE.}
 }
 \value{
 A dataframe in wide format (one column per habitat type).
