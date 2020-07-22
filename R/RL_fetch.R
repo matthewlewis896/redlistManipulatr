@@ -81,6 +81,7 @@ RL_fetch <-
       stop("You have supplied a number of CPU cores greater than the number available.")
     }
 
+    message("Using Red List version ", rredlist::rl_version(key = key))
     # Getting data (parallel or not)
 
     if(parallel == TRUE){

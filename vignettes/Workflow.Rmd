@@ -24,6 +24,44 @@ library(NatureMapRedList)
 
 ## Functions:
 
+### Getting a list of all species on the Red List
+
+`RL_sp_list()` obtains a list of all species on the Red List API, taxonomic info, and their assessment category. This is a wrapper function around `rredlist::rl_sp()` to get all species listed. 
+
+It requires an API key (`key`). These are obtainable from https://apiv3.iucnredlist.org/api/v3/token.
+
+Optional parameters `retain.population` and `retain.category` allow you to retain the species' population info and assessment category respectively.
+
+`retain.taxonomic.info` allows you to keep all of the taxonomic info (`all`), only Kingdom and Class (`some`) or none (`none`).
+
+``` {r, eval = FALSE}
+
+sp_list <-
+  RL_sp_list(
+    key = "your.api.key",
+    retain.taxonomic.info = "some",
+    retain.population = FALSE,
+    retain.category = TRUE
+  )
+
+```
+
+``` {r, echo = FALSE}
+sp_list <-
+  RL_sp_list(
+    key = "bcdf6849b4e6df1e0cecaf68490770dff7406cca9ae953a75174947117dd8d79",
+    retain.taxonomic.info = "some",
+    retain.population = FALSE,
+    retain.category = TRUE
+  )
+```
+
+``` {r, echo = FALSE, results = "asis"}
+
+pander::pandoc.table(sp_list[1:10,])
+
+```
+
 ### Obtaining data from the Red List
 
 `RL_fetch()` obtains habitat and elevation data from the Red List API.
