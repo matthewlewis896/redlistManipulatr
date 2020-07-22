@@ -17,13 +17,13 @@ You can install the released version of NatureMapRedList from [github](https://g
 devtools::install_github("matthewlewis896/NatureMapRedList")
 ```
 
-## Use
+## Description
 
-All functions intended for end users are denoted by a preceeding `RL_`. Other functions are internal.
+All functions intended for end users are denoted by a preceeding `RL_`.
 
 This package also contains several pieces of data used in the creation of Nature Map v1, including transcriptions of the [Red List Habitat Classification scheme v3.1](https://www.iucnredlist.org/resources/habitat-classification-scheme) and the [Red List Seasonal Distribution Codes](https://www.iucnredlist.org/resources/mappingstandards). See `?habitats` and `?seasons` for more information.
 
-## Workflow
+## Use
 
 ### Loading the Package
 
@@ -31,3 +31,10 @@ This package also contains several pieces of data used in the creation of Nature
 library(NatureMapRedList)
 ```
 
+### Workflow
+
+To see a workflow which approximates that used for Nature Map v1, use:
+
+``` r
+vignette(NatureMapRedList)
+```
