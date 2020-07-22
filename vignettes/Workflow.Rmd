@@ -261,10 +261,9 @@ pander::pandoc.table(df7[,])
 Whichever outputs want to be exported can then simply be exported as `.csv` files using:
 
 ``` {r, eval = FALSE}
-
 write.csv(
   df7,
-  file = "path/to/directory",
+  file = "path/to/directory/file.csv",
   row.names = FALSE
 )
 
