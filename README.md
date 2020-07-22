@@ -14,7 +14,7 @@ NatureMapRedList collects a group of functions used in the process of obtaining 
 You can install the released version of NatureMapRedList from [github](https://github.com/matthewlewis896/NatureMapRedList) with:
 
 ``` r
-devtools::install_github("matthewlewis896/NatureMapRedList")
+devtools::install_github("matthewlewis896/NatureMapRedList", build_vignettes = TRUE)
 ```
 
 ## Description
@@ -36,5 +36,5 @@ library(NatureMapRedList)
 To see a workflow which approximates that used for Nature Map v1, use:
 
 ``` r
-vignette(NatureMapRedList)
+vignette("Workflow")
 ```

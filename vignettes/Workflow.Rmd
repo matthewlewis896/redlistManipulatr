@@ -194,7 +194,7 @@ pander::pandoc.table(df4[,1:18])
 
 For AOH maps, we only want to retain habitats which are suitably suitable. `RL_subset_acceptable()` allows you to do this by specifying which suitabilities and major importances are good enough. Those which are not are recoded as `NA`.
 
-`acceptable_suitabilities` and `acceptable_importances` each take a vector input of suitability/major importance codes (see the `suitability` and `major importance` datasets) of which to retain. Both default to accepting all, meaning that specifying `acceptable_suitabilities` without specifying `acceptable_importances` will only filter by suitability.
+`acceptable_suitabilities` and `acceptable_importances` each take a vector input of suitability/major importance codes (see the `suitability` and `major_importance` datasets) of which to retain. Both default to accepting all, meaning that specifying `acceptable_suitabilities` without specifying `acceptable_importances` will only filter by suitability.
 
 `na.rm` allows you to specify whether a row should be removed if all of its habitat classes are changed to `NA`. This defaults to `TRUE`.
 
