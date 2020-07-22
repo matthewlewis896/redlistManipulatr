@@ -26,8 +26,8 @@ RL_subset_acceptable <-
       unlist() %>%
       sort()
 
-    if(!is.na(acceptable_suitabilities) |
-       !is.na(acceptable_importances)
+    if(all(!is.na(acceptable_suitabilities)) |
+       all(!is.na(acceptable_importances))
        ){
       rows_to_remove <- c()
       for(i in 1:nrow(x)){
@@ -47,14 +47,14 @@ RL_subset_acceptable <-
                        paste(collapse = "")
 
                      allow = 0
-                     if(!is.na(acceptable_suitabilities)){
+                     if(all(!is.na(acceptable_suitabilities))){
                        if(suit %in% acceptable_suitabilities){
                          allow = allow + 1
                        }
                      }else{
                        allow = allow + 1
                      }
-                     if(!is.na(acceptable_importances)){
+                     if(all(!is.na(acceptable_importances))){
                        if(maj_imp %in% acceptable_importances){
                          allow = allow + 1
                        }

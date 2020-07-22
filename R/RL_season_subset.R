@@ -69,17 +69,17 @@ RL_season_subset <-
       x[0,]
 
     for(i in 1:nrow(season_df)){
-      species <- unique(season_df[,species.col])[i]
-      seas <- unique(season_df[which(season_df[,species.col]==species),season.col])[i]
+      species <- season_df[i,species.col]
+      seas <- season_df[i,season.col]
 
       temp <- x[x[,query] == species &
                 x$season == seas,]
       #copy from other seasons if no data for desired season
-      if(nrow(temp) == 0L &
-         !is.na(fill.missing.seasons)){
+      if(all(nrow(temp) == 0L &
+         all(!is.na(fill.missing.seasons)))){
         other_seasons <-
           x[x[,query] == species &
-              x$season %in% fill.missing.seasons,]
+            x$season %in% fill.missing.seasons,]
 
         if(nrow(other_seasons) >0L){
           temp <- other_seasons[1,]
@@ -102,7 +102,7 @@ RL_season_subset <-
         }else{
           temp <- x[1,]
           temp[1,] <- NA
-          temp[1,query] <- species
+          temp[1, query] <- species
           temp[1,"season"] <- seas
         }
       }

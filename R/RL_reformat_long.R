@@ -24,13 +24,16 @@ RL_reformat_long <-
     suitability <- NatureMapRedList::suitability
     major_importance <- NatureMapRedList::major_importance
 
+    hab_cols <-
+      hab_col_positions() %>%
+      unlist() %>%
+      sort() %>%
+      as.vector()
+
     df <-
       x %>%
       tidyr::pivot_longer(
-        cols =
-          hab_col_positions() %>%
-          unlist() %>%
-          sort(),
+        cols = tidyselect::all_of(hab_cols),
         names_to = "level_3",
         values_to = "suitability"
       )
@@ -62,7 +65,7 @@ RL_reformat_long <-
                      maj_imp
                    )
                }
-              return(x)
+              return(y)
              })
 
     df$season_text <- df$suitability_text <- df$major_importance <- df$major_importance_text <- df$level_1 <- df$level_2 <- NA

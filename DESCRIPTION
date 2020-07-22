@@ -14,7 +14,7 @@ Language: en-GB
 LazyData: true
 Licence: MIT
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Imports: 
     rredlist,
     magrittr,
@@ -24,4 +24,10 @@ Imports:
     doSNOW,
     tidyr,
     utils,
-    stats
+    stats,
+    pander,
+    tidyselect
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

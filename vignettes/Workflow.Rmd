@@ -1,0 +1,272 @@
+---
+title: "Nature Map Workflow"
+author: "Matt Lewis"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#"
+)
+```
+
+## Setup:
+
+```{r setup}
+library(NatureMapRedList)
+```
+
+## Functions:
+
+### Obtaining data from the Red List
+
+`RL_fetch()` obtains habitat and elevation data from the Red List API.
+
+Species' names or IDs are supplied using the parameter `x`. `x` can be a `vector`, `list`, or `dataframe` of species' names or IUCN IDs (specify which using the parameter `query`). If `x` is a `dataframe`, the additional parameter `col.name` is needed to specify the column name of the species' names/IDs.
+
+An API key for the Red List (`key`) must also be supplied. These are obtainable from https://apiv3.iucnredlist.org/api/v3/token.
+
+A simple example could look like:
+
+``` {r, eval = FALSE}
+# Fetch data from the Red List:
+df <- 
+  RL_fetch(
+    x = 
+      c(
+        "Panthera leo", 
+        "Parus major",
+        "Pinus oocarpa"
+      ),
+    query = "name",
+    key = "your.api.key"
+  )
+```
+``` {r, echo = FALSE}
+
+df <- 
+  RL_fetch(
+    x = 
+      c(
+        "Panthera leo", 
+        "Parus major",
+        "Pinus oocarpa"
+      ),
+    query = "name",
+    key = "bcdf6849b4e6df1e0cecaf68490770dff7406cca9ae953a75174947117dd8d79"
+  )
+
+```
+
+This produces a `dataframe` in the following form (n.b. not all columns are shown for space).
+
+Habitat suitability is coded as `3` for Suitable, `2` for Marginal, `5` for Unknown, and `999` for any missing values. See the `suitability` dataset.
+
+Habitat major importance is coded as `1` for Yes, `2` for No, and `3` for missing values. See the `major_importance` dataset.
+
+These values are pasted together to give the values for each habitat class cell such that a suitable-major importance:Yes habitat is given the value `31`. 
+
+If there are no habitat data associated with a species, it is given the value of `66`.
+
+If elevation data is missing, the minimum/maximum elevation value is set to `-99999` or `99999` respectively.
+
+Seasons are coded as per the Red List, such that `1` is Resident, `2` is Breeding Season, `3` is Non-breeding Season, `4` is Passage, and `5` is Seasonal Occurrence Uncertain. Missing values are again given `999`. See the `seasons` dataset.
+
+``` {r, echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df[,1:18])
+
+```
+
+`RL_fetch()` also allows for additional customisation. 
+
+By default it runs in parallel, but this can be altered by setting the parameter `parallel` to `FALSE`. If running in parallel, the number of cores can also be specified manually using `num.cores`.
+
+It can also be tested on a subset of data, set by changing `subset` to the proportion of data desired. 
+
+The duration of sleep between each call to the Red List API can also be manually set using `sleep_dur`.
+
+Finally, there are 3 options for `verbose`. `verbose = 0` gives no progress update, `verbose = 1` gives a progress bar (the default), and `verbose = 2` prints one line for each task completed.
+
+Habitat suitability and major importance codes (see the `habitats` and `major_importance` data) are pasted together to give each cell value
+
+For more details see `?RL_fetch()`.
+
+### Recoding Level 1 or Level 2 habitats
+
+`RL_code_fill()` allows filling of Level 1 codes with the maximum suitable corresponding Level 2 code, and filling of blank Level 2 codes with the value of the corresponding Level 1 code.
+
+It takes an input of a wide format `dataframe` (as output by `RL_fetch()`).
+
+Example use:
+
+``` {r}
+df2 <-
+  RL_code_fill(
+    x = df,
+    level1.recode = TRUE,
+    level2.recode = FALSE
+  )
+```
+
+``` {r, echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df2[,1:18])
+
+```
+
+Additional parameters `subset`, `parallel`, `num.cores`, and `verbose` operate the same as for `RL_fetch()`.
+
+See `?RL_code_fill()` for more details.
+
+### Recoding NA seasons or habitat suitabilities
+
+Some species have seasonal occurrence for a particular habitat missing on the Red List, or else have habitat suitability missing. In these cases, `RL_fetch()` pulls down this data as `999`. This behaviour may not be desired, and the functions `RL_season_recode()` and `RL_suit_recode()` exist to recode these values.
+
+`RL_season_recode()` recodes `999` seasons as 'Resident', giving a code of `1` (see the `seasons` data).
+
+`RL_suit_recode()` recodes `999` habitat suitabilities as 'Suitable', giving a code of `3` (see the `suitability` data).
+
+``` {r}
+df3 <-
+  RL_season_recode(
+    x = df2
+  )
+```
+
+``` {r echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df3[,1:18])
+
+```
+
+See `?RL_suit_recode()` or `?RL_season_recode()` for more details.
+
+### Subsetting to desired seasons
+
+In some cases, a species may have particular seasons which are desired and others which are not. `RL_season_subset()` allows you to subset to the seasons you'd like to have data for.
+
+Once again, `x` is a wide format `data.frame` as output by `RL_fetch()` or any function manipulating it.
+
+`season_df` is a `dataframe` that contains at least two columns: one for species' names or IDs, and one for the season codes that are wanted for that species. A species with multiple seasons wanted should have one row per season. By default, the first column is assumed to be species' names/IDs and the second to be seasons, but this can be changed by specifying the column names with `species.col.name` and `season.col.name`. `query` specifies whether we are dealing with species' names ("name") or IDs ("ID").
+
+As well as subsetting to desired seasons, `RL_season_subset()` also allows filling of missing seasons. If, for instance, a species has data for the Breeding Season and Non-breeding Season, but not data for when it is Resident (the desired season), this can be copied from the other seasons. `fill.missing.seasons` takes a `vector` input of seasons to copy from - in this example `fill.missing.seasons = c(2, 3)` - and will copy the highest suitability-major importance combination available for that habitat class. This ranking of suitability-major importance combinations is controlled by the dataset `suitability_ordered`.
+
+`retain.na.seasons` allows missing seasons (coded as `999` by `RL_fetch()`) to be retained even if not present in `season_df`. This defaults to `FALSE`. Other options include first recoding these seasons with `RL_season_recode()`.
+
+`retain.missing.sp` allows species not present in `season_df` to be retained. Meaning species present in `season_df` will be subset to the desired seasons while those which aren't present are retained as they are. Defaults to `TRUE`.
+
+``` {r}
+my_seasons <-
+  data.frame(
+    species = c("Panthera leo",
+                "Pinus oocarpa"),
+    seasons = 1
+  )
+
+df4 <-
+     RL_season_subset(
+         x = df2,
+         season_df = my_seasons,
+         query = "name",
+         fill.missing.seasons = c(1, 999),
+         retain.na.seasons = FALSE,
+         retain.missing.sp = FALSE
+     )
+
+```
+
+``` {r, echo = FALSE, results = "asis"}
+
+rownames(df4) <- 1:nrow(df4)
+
+pander::pandoc.table(df4[,1:18])
+
+```
+
+### Subsetting to retain only some habitat suitabilities or major importances
+
+For AOH maps, we only want to retain habitats which are suitably suitable. `RL_subset_acceptable()` allows you to do this by specifying which suitabilities and major importances are good enough. Those which are not are recoded as `NA`.
+
+`acceptable_suitabilities` and `acceptable_importances` each take a vector input of suitability/major importance codes (see the `suitability` and `major importance` datasets) of which to retain. Both default to accepting all, meaning that specifying `acceptable_suitabilities` without specifying `acceptable_importances` will only filter by suitability.
+
+`na.rm` allows you to specify whether a row should be removed if all of its habitat classes are changed to `NA`. This defaults to `TRUE`.
+
+``` {r}
+
+df5 <-
+  RL_subset_acceptable(
+    x = df4,
+    acceptable_suitabilities = c(3, 999),
+    acceptable_importances = 1
+  )
+
+```
+
+``` {r, echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df5[,1:18])
+
+```
+
+### Making ready for Google Earth Engine
+
+To make this ready for Google Earth Engine, we need to change the habitat column names to new versions- e.g. `iucn_1_1` to `110`, and then fill out the remaining habitat suitability scores (after running `RL_subset_acceptable()`) with the column names.
+
+`RL_GEE_ready()` handles this and relies on a look-up table of data which is provided as the dataset `hab_conversion_lut`.
+
+``` {r}
+df6 <-
+  RL_GEE_ready(
+    x = df5
+  )
+```
+
+``` {r, echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df6[,1:18])
+
+```
+
+### Reformatting to other formats
+
+Thus far we have dealt only with wide-format data (one column per habitat type), but sometimes long-format data (one row per habitat type) can be useful.
+
+`RL_reformat_long()` deals with this and can be used at any stage of the process prior to *Making Ready for Google Earth Engine* (i.e. before use of `RL_GEE_ready()`). `x` is the input `dataframe`, while `na.rm` allows you to remove rows with habitats that have no suitability information. This defaults to `TRUE`.
+
+``` {r}
+df7 <-
+  RL_reformat_long(
+    x = df5,
+    na.rm = TRUE
+  )
+```
+
+``` {r, echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df7[,])
+
+```
+
+`RL_reformat_wide()` allows reformatting of the output of `RL_reformat_long()` back to wide-format. The parameter `x` is the long-format `dataframe`.
+
+### Exporting
+
+Whichever outputs want to be exported can then simply be exported as `.csv` files using:
+
+``` {r, eval = FALSE}
+
+write.csv(
+  df7,
+  file = "path/to/directory",
+  row.names = FALSE
+)
+
+```
+
