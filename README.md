@@ -1,5 +1,5 @@
 
-# NatureMapRedList
+# redlistManipulatr
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/matthewlewis896/NatureMapRedList.svg?branch=master)](https://travis-ci.com/matthewlewis896/NatureMapRedList)
