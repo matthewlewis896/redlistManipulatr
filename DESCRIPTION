@@ -1,5 +1,5 @@
-Package: NatureMapRedList
-Title: Obtain Red List data in useful formats for Nature Map
+Package: redlistmanipulatr
+Title: Obtain Red List habitat and elevation data and manipulate formats
 Version: 0.3.0
 Authors@R: 
     person(given = "Matthew",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "matthewlewis896@gmail.com",
            comment = c(ORCID = "0000-0003-2244-4078"))
-Description: A collection of functions used to pull and manipulate IUCN Red List habitat and elevation data used in Nature Map v1.
+Description: A collection of functions used to pull and manipulate IUCN Red List habitat and elevation data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-GB
