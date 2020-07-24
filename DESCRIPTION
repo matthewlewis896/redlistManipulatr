@@ -1,6 +1,6 @@
 Package: NatureMapRedList
 Title: Obtain Red List data in useful formats for Nature Map
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     person(given = "Matthew",
            family = "Lewis",
