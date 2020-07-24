@@ -57,7 +57,11 @@ RL_reformat_long <-
                    strsplit("") %>%
                    unlist()
                  maj_imp <- y[length(y)]
-                 suit <- y[1:(length(y)-1)]
+                 suit <-
+                   y[1:(length(y)-1)] %>%
+                   paste(
+                     collapse = ""
+                   )
 
                  y <-
                    c(

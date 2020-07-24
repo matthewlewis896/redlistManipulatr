@@ -206,6 +206,12 @@ pander::pandoc.table(df3[,1:18])
 
 See `?RL_suit_recode()` or `?RL_season_recode()` for more details.
 
+### Checking elevation values
+
+Sometimes a species on the Red List will have minimum elevation > maximum elevation, something which cannot be true. `RL_elevation_check()` finds all instances of this and changes them to be -99999 and 99999 for min and max altitude respectively.
+
+This works on any wide-format `dataframe` or a long-format `dataframe` (from `RL_reformat_long()`).
+
 ### Subsetting to desired seasons
 
 In some cases, a species may have particular seasons which are desired and others which are not. `RL_season_subset()` allows you to subset to the seasons you'd like to have data for.
@@ -250,7 +256,7 @@ pander::pandoc.table(df4[,1:18])
 
 ### Subsetting to retain only some habitat suitabilities or major importances
 
-For AOH maps, we only want to retain habitats which are suitably suitable. `RL_subset_acceptable()` allows you to do this by specifying which suitabilities and major importances are good enough. Those which are not are recoded as `NA`.
+For Area Of Habitat (AOH) maps and similar, we only want to retain habitats which are suitably suitable. `RL_subset_acceptable()` allows you to do this by specifying which suitabilities and major importances are good enough. Those which are not are recoded as `NA`.
 
 `acceptable_suitabilities` and `acceptable_importances` each take a vector input of suitability/major importance codes (see the `suitability` and `major_importance` datasets) of which to retain. Both default to accepting all, meaning that specifying `acceptable_suitabilities` without specifying `acceptable_importances` will only filter by suitability.
 
@@ -273,16 +279,24 @@ pander::pandoc.table(df5[,1:18])
 
 ```
 
-### Making ready for Google Earth Engine
+### Crosswalking habitats classes to a look-up table
 
-To make this ready for Google Earth Engine, we need to change the habitat column names to new versions- e.g. `iucn_1_1` to `110`, and then fill out the remaining habitat suitability scores (after running `RL_subset_acceptable()`) with the column names.
+Red List habitat classes may want to be converted via a look-up table to new values, for instance land cover. `RL_crosswalk()` allows cross-walking of a one-to-one, one-to-many, or many-to-many look-up table (`lut`) on a wide-format input (`x`).
 
-`RL_GEE_ready()` handles this and relies on a look-up table of data which is provided as the dataset `hab_conversion_lut`.
+A default `lut` is supplied via the \code{hab_conversion_lut} dataset which just converts habitat classes to integer values - e.g. 1.1 -> 110; 9.8.1 -> 981.
+
+If supplying your own `lut`, the parameters `new.code.colname` and `old.code.colname` allow you to specify which columns of `lut` correspond to the new values and the old IUCN habitat codes. This defaults to the first column for new values and the second for old values if these parameters are not specified.
+
+When cross-walking, you can choose whether to change values using `recode`. `"no"` will keep the habitat-major importance values (note: if using a many-to-many `lut`, the highest ranked suitability-major importance combination from `suitability_ordered` is selected). `"one"` recodes any present values to `1`, and `"colname"` recodes values to the name of the column they are in.
+
+If recoding, then `RL_subset_acceptable()` should be run first if only some suitability/major importance combinations are wanted.
+
 
 ``` {r}
 df6 <-
-  RL_GEE_ready(
-    x = df5
+  RL_crosswalk(
+    x = df5,
+    recode = "colname"
   )
 ```
 
@@ -291,12 +305,13 @@ df6 <-
 pander::pandoc.table(df6[,1:18])
 
 ```
+See `?RL_crosswalk()` for more information.
 
 ### Reformatting to other formats
 
 Thus far we have dealt only with wide-format data (one column per habitat type), but sometimes long-format data (one row per habitat type) can be useful.
 
-`RL_reformat_long()` deals with this and can be used at any stage of the process prior to **Making Ready for Google Earth Engine** (i.e. before use of `RL_GEE_ready()`). `x` is the input `dataframe`, while `na.rm` allows you to remove rows with habitats that have no suitability information. This defaults to `TRUE`.
+`RL_reformat_long()` deals with this and can be used at any stage of the process prior to crosswalking to a look-up table (i.e. before use of `RL_crosswalk()`). `x` is the input `dataframe`, while `na.rm` allows you to remove rows with habitats that have no suitability information. This defaults to `TRUE`.
 
 ``` {r}
 df7 <-
