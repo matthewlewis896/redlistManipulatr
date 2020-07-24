@@ -20,7 +20,7 @@ remotes::install_github("matthewlewis896/redlistManipulatr", build_vignettes = T
 
 All functions intended for end users are denoted by a preceeding `RL_`.
 
-This package also contains several pieces of Red List data, including transcriptions of the [Red List Habitat Classification scheme v3.1](https://www.iucnredlist.org/resources/habitat-classification-scheme) and the [Red List Seasonal Distribution Codes](https://www.iucnredlist.org/resources/mappingstandards). See `?habitats` and `?seasons` for more information.
+This package also contains several pieces of Red List data, including transcriptions of the [Red List Habitat Classification scheme v3.1](https://www.iucnredlist.org/resources/habitat-classification-scheme) and the [Red List Seasonal Distribution Codes](https://www.iucnredlist.org/resources/mappingstandards). See `?habitats` and `?seasons` for more information and `View(habitats)` or `View(seasons)` to view the data.
 
 ## Use
 
@@ -30,9 +30,9 @@ This package also contains several pieces of Red List data, including transcript
 library(redlistManipulatr)
 ```
 
-### Workflow
+### Capabilities
 
-To see a workflow which approximates that used for Nature Map v1, use:
+To see a breakdown of the main functions of the package with examples see the `vignette`.
 
 ``` r
 vignette("redlistManipulatr")
