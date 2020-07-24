@@ -124,5 +124,6 @@ RL_reformat_long <-
       df[,c(colnames(df)[1:which(colnames(df) == "max_alt")],
             "season_text","level_1","level_2", "level_3","suitability","suitability_text","major_importance","major_importance_text")]
 
+    df <- as.data.frame(df)
     return(df)
   }
