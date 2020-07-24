@@ -45,7 +45,6 @@ RL_elevation_check <-
       if(verbose == TRUE){
         message("No species have had elevations changed.")
       }
-
     }
 
 
