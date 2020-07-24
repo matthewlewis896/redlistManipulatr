@@ -2,16 +2,16 @@
 #' @description Internal Function. Makes a wide format dataframe to output RL_fetch() into according to the Red List level2 habitats. The number of rows corresponds to the number of seasons coded by the Red List.
 #' @author Matt Lewis, \email{matthewlewis896@@gmail.com}
 #' @keywords internal
-#' @param habs Dataframe of Red List habitat categories. Taken from NatureMapRedList::habitats.
-#' @param seas Dataframe of Red List season codes Taken from NatureMapRedList::seasons.
+#' @param habs Dataframe of Red List habitat categories. Taken from redlistManipulatr::habitats.
+#' @param seas Dataframe of Red List season codes Taken from redlistManipulatr::seasons.
 #'
 #' @return A dataframe in wide format (one column per habitat type and one row per species).
 
 
 wideform <-
   function(
-    habs = NatureMapRedList::habitats,
-    seas = NatureMapRedList::seasons
+    habs = redlistManipulatr::habitats,
+    seas = redlistManipulatr::seasons
   ){
     habs$Level2[is.na(habs$Level2)] <- habs$Level1[is.na(habs$Level2)]
     habs$Level3[is.na(habs$Level3)] <- habs$Level2[is.na(habs$Level3)]

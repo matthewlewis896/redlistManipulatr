@@ -1,4 +1,4 @@
-#' NatureMap Red List Habitat Major Importance Codes
+#' Nature Map Red List Habitat Major Importance Codes
 #'
 #' @description Codes for habitat major importance Somewhat arbitrarily created. Alter this data to alter functions.
 #'

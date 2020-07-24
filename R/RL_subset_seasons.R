@@ -10,11 +10,11 @@
 #' @param fill.missing.seasons (optional) Vector. If seasons are present in \code{season_df} but not on the Red List, should data be copied from seasons which are present and if so which? Acceptable values are season codes - see \code{seasons}. Defaults to NA (no copying).
 #' @param retain.na.seasons (optional) Logical. Some seasons are coded as NA on the Red List. RL_fetch() pulls these down as 999. Would you like to retain these seasons? Defaults to FALSE.
 #' @param retain.missing.sp (optional) Logical. If a species is not found in season_df, should it be retained? Defaults to TRUE.
-#' @details \code{season_df} should have seasons coded numerically as per \code{NatureMapRedList::seasons$Code}.
+#' @details \code{season_df} should have seasons coded numerically as per \code{redlistManipulatr::seasons$Code}.
 #' @return A dataframe in wide format (one column per habitat type).
 #' @export
 
-RL_season_subset <-
+RL_subset_seasons <-
   function(
     x,
     season_df,
@@ -63,7 +63,7 @@ RL_season_subset <-
       unlist() %>%
       sort()
 
-    pref_order <- NatureMapRedList::suitability_ordered
+    pref_order <- redlistManipulatr::suitability_ordered
 
     output <-
       x[0,]

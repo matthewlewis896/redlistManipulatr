@@ -4,12 +4,12 @@
 \alias{wideform}
 \title{Wide format dataframe for RL_fetch()}
 \usage{
-wideform(habs = NatureMapRedList::habitats, seas = NatureMapRedList::seasons)
+wideform(habs = redlistManipulatr::habitats, seas = redlistManipulatr::seasons)
 }
 \arguments{
-\item{habs}{Dataframe of Red List habitat categories. Taken from NatureMapRedList::habitats.}
+\item{habs}{Dataframe of Red List habitat categories. Taken from redlistManipulatr::habitats.}
 
-\item{seas}{Dataframe of Red List season codes Taken from NatureMapRedList::seasons.}
+\item{seas}{Dataframe of Red List season codes Taken from redlistManipulatr::seasons.}
 }
 \value{
 A dataframe in wide format (one column per habitat type and one row per species).

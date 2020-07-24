@@ -3,7 +3,7 @@
 \docType{data}
 \name{suitability}
 \alias{suitability}
-\title{NatureMap Red List Suitability Codes}
+\title{Nature Map Red List Suitability Codes}
 \format{
 An object of class \code{"data.frame"}
 }

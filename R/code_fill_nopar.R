@@ -26,7 +26,7 @@ code_fill_nopar <-
     hab_cols <- hab_col_positions()
     cols_to_check <- as.vector(sort(unlist(hab_cols)))
 
-    pref_order <- NatureMapRedList::suitability_ordered
+    pref_order <- redlistManipulatr::suitability_ordered
 
 
     ret <- foreach::foreach(i = 1:subset,

@@ -23,9 +23,9 @@ fetch_nopar <-
 
 
     temp_df <- wideform()
-    seasons <- NatureMapRedList::seasons
-    suitability <- NatureMapRedList::suitability
-    major_importance <- NatureMapRedList::major_importance
+    seasons <- redlistManipulatr::seasons
+    suitability <- redlistManipulatr::suitability
+    major_importance <- redlistManipulatr::major_importance
     cols_to_check <-
       hab_col_positions() %>%
       unlist() %>%

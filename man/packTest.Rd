@@ -10,7 +10,7 @@ packTest(pack)
 \item{pack}{Character. Package name.}
 }
 \description{
-Internal Function. Checks packages necessary for operation are loaded. Stops execution if not
+Internal Function. Checks packages necessary for operation are loaded. Stops execution if not.
 }
 \author{
 Matt Lewis, \email{matthewlewis896@gmail.com}

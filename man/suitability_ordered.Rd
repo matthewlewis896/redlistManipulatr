@@ -3,7 +3,7 @@
 \docType{data}
 \name{suitability_ordered}
 \alias{suitability_ordered}
-\title{NatureMap Red List Suitability/Major Importance Code Hierarchy}
+\title{Nature Map Red List Suitability/Major Importance Code Hierarchy}
 \format{
 An object of class \code{"data.frame"}
 }

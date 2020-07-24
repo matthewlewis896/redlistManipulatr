@@ -7,7 +7,7 @@
 #' @return A dataframe in wide format (one column per habitat type).
 #' @export
 
-RL_season_recode <-
+RL_recode_seasons <-
   function(
     x,
     combine.rows = FALSE
@@ -40,7 +40,7 @@ RL_season_recode <-
               sort() %>%
               as.vector()
 
-            pref_order = NatureMapRedList::suitability_ordered
+            pref_order = redlistManipulatr::suitability_ordered
 
             for(j in hab_cols){
               vals <- t2[,j]

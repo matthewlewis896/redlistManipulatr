@@ -15,7 +15,7 @@
 RL_crosswalk <-
   function(
     x,
-    lut = NatureMapRedList::hab_conversion_lut,
+    lut = redlistManipulatr::hab_conversion_lut,
     new.code.colname = NULL,
     old.code.colname = NULL,
     recode = "no"
@@ -89,7 +89,7 @@ RL_crosswalk <-
         cols_to_check[1]:(cols_to_check[1] + (length(new_colnames)-1))
       )
 
-    pref_order <- NatureMapRedList::suitability_ordered
+    pref_order <- redlistManipulatr::suitability_ordered
 
     output[,1:(new_cols[1]-1)] <- x[,1:(new_cols[1]-1)]
     if(recode == "no"){

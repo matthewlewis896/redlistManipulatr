@@ -3,7 +3,7 @@
 \docType{data}
 \name{major_importance}
 \alias{major_importance}
-\title{NatureMap Red List Habitat Major Importance Codes}
+\title{Nature Map Red List Habitat Major Importance Codes}
 \format{
 An object of class \code{"data.frame"}
 }

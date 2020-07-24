@@ -6,7 +6,7 @@
 #' @return A dataframe in wide format (one column per habitat type).
 #' @export
 
-RL_suit_recode <-
+RL_recode_suitabilities <-
   function(
     x
   ){

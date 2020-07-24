@@ -7,28 +7,28 @@
 [![Codecov test coverage](https://codecov.io/gh/matthewlewis896/NatureMapRedList/branch/master/graph/badge.svg)](https://codecov.io/gh/matthewlewis896/NatureMapRedList?branch=master)
 <!-- badges: end -->
 
-NatureMapRedList collects a group of functions used in the process of obtaining and manipulating IUCN Red List data used in the creation of Nature Map v1.
+redlistManipulatr collects a group of functions used to pull and manipulate IUCN Red List habitat and elevation data.
 
 ## Installation
 
-You can install the released version of NatureMapRedList from [github](https://github.com/matthewlewis896/NatureMapRedList) with:
+You can install the released version of redlistManipulatr from [github](https://github.com/matthewlewis896/redlistManipulatr) with:
 
 ``` r
-devtools::install_github("matthewlewis896/NatureMapRedList", build_vignettes = TRUE)
+devtools::install_github("matthewlewis896/redlistManipulatr", build_vignettes = TRUE)
 ```
 
 ## Description
 
 All functions intended for end users are denoted by a preceeding `RL_`.
 
-This package also contains several pieces of data used in the creation of Nature Map v1, including transcriptions of the [Red List Habitat Classification scheme v3.1](https://www.iucnredlist.org/resources/habitat-classification-scheme) and the [Red List Seasonal Distribution Codes](https://www.iucnredlist.org/resources/mappingstandards). See `?habitats` and `?seasons` for more information.
+This package also contains several pieces of Red List data, including transcriptions of the [Red List Habitat Classification scheme v3.1](https://www.iucnredlist.org/resources/habitat-classification-scheme) and the [Red List Seasonal Distribution Codes](https://www.iucnredlist.org/resources/mappingstandards). See `?habitats` and `?seasons` for more information.
 
 ## Use
 
 ### Loading the Package
 
 ``` r
-library(NatureMapRedList)
+library(redlistManipulatr)
 ```
 
 ### Workflow
@@ -36,5 +36,5 @@ library(NatureMapRedList)
 To see a workflow which approximates that used for Nature Map v1, use:
 
 ``` r
-vignette("Workflow")
+vignette("redlistManipulatr")
 ```

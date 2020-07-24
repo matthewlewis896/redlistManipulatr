@@ -57,9 +57,9 @@ fetch_par <-
     on.exit(snow::stopCluster(cl))
 
     temp_df <- wideform()
-    seasons <- NatureMapRedList::seasons
-    suitability <- NatureMapRedList::suitability
-    major_importance <- NatureMapRedList::major_importance
+    seasons <- redlistManipulatr::seasons
+    suitability <- redlistManipulatr::suitability
+    major_importance <- redlistManipulatr::major_importance
 
     ret <- foreach::foreach (
       i = 1:subset,

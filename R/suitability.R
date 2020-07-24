@@ -1,4 +1,4 @@
-#' NatureMap Red List Suitability Codes
+#' Nature Map Red List Suitability Codes
 #'
 #' @description Codes for habitat suitability. Somewhat arbitrarily created. Alter this data to alter functions.
 #'

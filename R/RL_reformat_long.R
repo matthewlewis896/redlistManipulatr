@@ -19,10 +19,10 @@ RL_reformat_long <-
 
     packTest("tidyr")
 
-    habitats <- NatureMapRedList::habitats
-    seasons <- NatureMapRedList::seasons
-    suitability <- NatureMapRedList::suitability
-    major_importance <- NatureMapRedList::major_importance
+    habitats <- redlistManipulatr::habitats
+    seasons <- redlistManipulatr::seasons
+    suitability <- redlistManipulatr::suitability
+    major_importance <- redlistManipulatr::major_importance
 
     hab_cols <-
       hab_col_positions() %>%

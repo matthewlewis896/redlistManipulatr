@@ -1,4 +1,4 @@
-#' NatureMap Red List Suitability/Major Importance Code Hierarchy
+#' Nature Map Red List Suitability/Major Importance Code Hierarchy
 #'
 #' @description Hierarchy of suitability-major importance codes (from first to last). Used internally.
 #'

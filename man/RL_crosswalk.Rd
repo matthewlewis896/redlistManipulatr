@@ -6,7 +6,7 @@
 \usage{
 RL_crosswalk(
   x,
-  lut = NatureMapRedList::hab_conversion_lut,
+  lut = redlistManipulatr::hab_conversion_lut,
   new.code.colname = NULL,
   old.code.colname = NULL,
   recode = "no"

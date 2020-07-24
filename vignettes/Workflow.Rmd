@@ -1,5 +1,5 @@
 ---
-title: "Nature Map Workflow"
+title: "redlistManipulatr"
 author: "Matt Lewis"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ## Setup:
 
 ```{r setup}
-library(NatureMapRedList)
+library(redlistManipulatr)
 ```
 
 ## Functions:
@@ -62,7 +62,7 @@ pander::pandoc.table(sp_list[1:10,])
 
 ```
 
-### Obtaining data from the Red List
+### Obtaining habitat and elevation data from the Red List
 
 `RL_fetch()` obtains habitat and elevation data from the Red List API.
 
@@ -132,7 +132,7 @@ The duration of sleep between each call to the Red List API can also be manually
 
 Finally, there are 3 options for `verbose`. `verbose = 0` gives no progress update, `verbose = 1` gives a progress bar (the default), and `verbose = 2` prints one line for each task completed.
 
-Habitat suitability and major importance codes (see the `habitats` and `major_importance` data) are pasted together to give each cell value
+Habitat suitability and major importance codes (see the `habitats` and `major_importance` data) are pasted together to give each cell value.
 
 For more details see `?RL_fetch()`.
 
@@ -165,19 +165,19 @@ See `?RL_code_fill()` for more details.
 
 ### Recoding missing habitat suitabilities and seasons
 
-Some species have seasonal occurrence for a particular habitat missing on the Red List, or else have habitat suitability missing. In these cases, `RL_fetch()` pulls down this data as `999`. This behaviour may not be desired, and the functions `RL_season_recode()` and `RL_suit_recode()` exist to recode these values.
+Some species have seasonal occurrence for a particular habitat missing on the Red List, or else have habitat suitability missing. In these cases, `RL_fetch()` pulls down this data as `999`. This behaviour may not be desired, and the functions `RL_recode_seasons()` and `RL_recode_suitabilities()` exist to recode these values.
 
-`RL_suit_recode()` recodes `999` habitat suitabilities as 'Suitable', giving a code of `3` (see the `suitability` data).
+`RL_recode_suitabilities()` recodes `999` habitat suitabilities as 'Suitable', giving a code of `3` (see the `suitability` data).
 
-`RL_season_recode()` recodes `999` seasons as 'Resident', giving a code of `1` (see the `seasons` data).
+`RL_recode_seasons()` recodes `999` seasons as 'Resident', giving a code of `1` (see the `seasons` data).
 
-As `RL_season_recode()` may cause multiple rows for Resident seasons (e.g. if a species has data that is both Resident and missing for season), the parameter `combine.rows` allows combining of these rows. In the case of both rows having suitability values for a habitat, the highest ranked suitability-major importance combination is selected, see `suitability_ordered` for this ranking. As a result, it is recommended to run `RL_suit_recode()` before `RL_season_recode()` if both are required, as `999` habitats are low priority. `combine.rows` defaults to `FALSE`.
+As `RL_recode_seasns()` may cause multiple rows for Resident seasons (e.g. if a species has data that is both Resident and missing for season), the parameter `combine.rows` allows combining of these rows. In the case of both rows having suitability values for a habitat, the highest ranked suitability-major importance combination is selected, see `suitability_ordered` for this ranking. As a result, it is recommended to run `RL_recode_suitabilities()` before `RL_recode_seasons()` if both are required, as `999` habitats are low priority. `combine.rows` defaults to `FALSE`.
 
 `combine.rows = FALSE`: 
 
 ``` {r}
 df3 <-
-  RL_season_recode(
+  RL_recode_seasons(
     x = df2,
     combine.rows = FALSE
   )
@@ -192,7 +192,7 @@ pander::pandoc.table(df3[,1:18])
 `combine.rows = TRUE`: 
 ``` {r}
 df3 <-
-  RL_season_recode(
+  RL_recode_seasons(
     x = df2,
     combine.rows = TRUE
   )
@@ -204,7 +204,7 @@ pander::pandoc.table(df3[,1:18])
 
 ```
 
-See `?RL_suit_recode()` or `?RL_season_recode()` for more details.
+See `?RL_recode_suitabilities()` or `?RL_recode_seasons()` for more details.
 
 ### Checking elevation values
 
@@ -212,17 +212,19 @@ Sometimes a species on the Red List will have minimum elevation > maximum elevat
 
 This works on any wide-format `dataframe` or a long-format `dataframe` (from `RL_reformat_long()`).
 
+See `?RL_elevation_check()` for more details.
+
 ### Subsetting to desired seasons
 
-In some cases, a species may have particular seasons which are desired and others which are not. `RL_season_subset()` allows you to subset to the seasons you'd like to have data for.
+In some cases, a species may have particular seasons which are desired and others which are not. `RL_subset_seasons()` allows you to subset to the seasons you'd like to have data for.
 
 Once again, `x` is a wide format `data.frame` as output by `RL_fetch()` or any function manipulating it.
 
 `season_df` is a `dataframe` that contains at least two columns: one for species' names or IDs, and one for the season codes that are wanted for that species. A species with multiple seasons wanted should have one row per season. By default, the first column is assumed to be species' names/IDs and the second to be seasons, but this can be changed by specifying the column names with `species.col.name` and `season.col.name`. `query` specifies whether we are dealing with species' names ("name") or IDs ("ID").
 
-As well as subsetting to desired seasons, `RL_season_subset()` also allows filling of missing seasons. If, for instance, a species has data for the Breeding Season and Non-breeding Season, but not data for when it is Resident (the desired season), this can be copied from the other seasons. `fill.missing.seasons` takes a `vector` input of seasons to copy from - in this example `fill.missing.seasons = c(2, 3)` - and will copy the highest suitability-major importance combination available for that habitat class. This ranking of suitability-major importance combinations is controlled by the dataset `suitability_ordered`.
+As well as subsetting to desired seasons, `RL_subset_seasons()` also allows filling of missing seasons. If, for instance, a species has data for the Breeding Season and Non-breeding Season, but not data for when it is Resident (the desired season), this can be copied from the other seasons. `fill.missing.seasons` takes a `vector` input of seasons to copy from - in this example `fill.missing.seasons = c(2, 3)` - and will copy the highest suitability-major importance combination available for that habitat class. This ranking of suitability-major importance combinations is controlled by the dataset `suitability_ordered`.
 
-`retain.na.seasons` allows missing seasons (coded as `999` by `RL_fetch()`) to be retained even if not present in `season_df`. This defaults to `FALSE`. Other options include first recoding these seasons with `RL_season_recode()`.
+`retain.na.seasons` allows missing seasons (coded as `999` by `RL_fetch()`) to be retained even if not present in `season_df`. This defaults to `FALSE`. Other options include first recoding these seasons with `RL_recode_seasons()`.
 
 `retain.missing.sp` allows species not present in `season_df` to be retained. Meaning species present in `season_df` will be subset to the desired seasons while those which aren't present are retained as they are. Defaults to `TRUE`.
 
@@ -235,7 +237,7 @@ my_seasons <-
   )
 
 df4 <-
-     RL_season_subset(
+     RL_subset_seasons(
          x = df2,
          season_df = my_seasons,
          query = "name",
@@ -254,9 +256,11 @@ pander::pandoc.table(df4[,1:18])
 
 ```
 
+See `RL_subset_seasons()` for more details.
+
 ### Subsetting to retain only some habitat suitabilities or major importances
 
-For Area Of Habitat (AOH) maps and similar, we only want to retain habitats which are suitably suitable. `RL_subset_acceptable()` allows you to do this by specifying which suitabilities and major importances are good enough. Those which are not are recoded as `NA`.
+For Area Of Habitat (AOH) maps or similar, you may only want to retain habitats habitats of particular suitabilities or major importances. `RL_subset_acceptable()` allows you to do this by specifying which suitabilities and major importances are good enough. Those which are not are recoded as `NA`.
 
 `acceptable_suitabilities` and `acceptable_importances` each take a vector input of suitability/major importance codes (see the `suitability` and `major_importance` datasets) of which to retain. Both default to accepting all, meaning that specifying `acceptable_suitabilities` without specifying `acceptable_importances` will only filter by suitability.
 
@@ -278,6 +282,8 @@ df5 <-
 pander::pandoc.table(df5[,1:18])
 
 ```
+
+See `?RL_subset_acceptable()` for more details.
 
 ### Crosswalking habitats classes to a look-up table
 
@@ -305,7 +311,7 @@ df6 <-
 pander::pandoc.table(df6[,1:18])
 
 ```
-See `?RL_crosswalk()` for more information.
+See `?RL_crosswalk()` for more details.
 
 ### Reformatting to other formats
 
