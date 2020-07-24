@@ -2,9 +2,8 @@
 # redlistManipulatr
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/matthewlewis896/NatureMapRedList.svg?branch=master)](https://travis-ci.com/matthewlewis896/NatureMapRedList)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/matthewlewis896/NatureMapRedList?branch=master&svg=true)](https://ci.appveyor.com/project/matthewlewis896/NatureMapRedList)
-[![Codecov test coverage](https://codecov.io/gh/matthewlewis896/NatureMapRedList/branch/master/graph/badge.svg)](https://codecov.io/gh/matthewlewis896/NatureMapRedList?branch=master)
+[![Travis build status](https://travis-ci.com/matthewlewis896/redlistManipulatr.svg?branch=master)](https://travis-ci.com/matthewlewis896/redlistManipulatr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/matthewlewis896/redlistManipulatr?branch=master&svg=true)](https://ci.appveyor.com/project/matthewlewis896/redlistManipulatr)
 <!-- badges: end -->
 
 redlistManipulatr collects a group of functions used to pull and manipulate IUCN Red List habitat and elevation data.
