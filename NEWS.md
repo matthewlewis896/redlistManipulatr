@@ -1,3 +1,5 @@
+# redlistManipulatr 0.3.2
+
 # redlistManipulatr 0.3.1
 
 * Updated vignette
