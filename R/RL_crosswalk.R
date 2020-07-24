@@ -99,11 +99,11 @@ RL_crosswalk <-
       }
     }else if(recode == "one"){
       for(i in new_cols){
-        levels(output[,i]) <- "1"
+        levels(output[,i]) <- c(levels(output[,i]), "1")
       }
     }else if(recode == "colname"){
       for(i in new_cols){
-        levels(output[,i]) <- colnames(output)[i][which(!(colnames(output)[i] %in% levels(output[,i])))]
+        levels(output[,i]) <- c(levels(output[,i]), colnames(output)[i][which(!(colnames(output)[i] %in% levels(output[,i])))])
       }
     }
 
@@ -113,20 +113,19 @@ RL_crosswalk <-
           colnames(output)[j]
         competing_cols <-
           lut[lut[,new.col] == new_value, old.col]
-
-        if(length(competing_cols) == 0L){
+        vals <- x[i, which(colnames(x) %in% competing_cols)]
+        vals <- vals[!is.na(vals)]
+        if(length(vals) == 0L){
           output[i,j] <- NA
-        }else if(recode == "one"){
+        }else{
+          if(recode == "one"){
           output[i,j] <- 1
-        }else if(recode == "colname"){
-          output[i,j] <- new_value
-        }else if(recode == "no"){
-          if(length(competing_cols) == 1L) {
-            output[i, j] <- x[i, which(colnames(x) == competing_cols)]
-          } else{
-            vals <- x[i, which(colnames(x) %in% competing_cols)]
-            vals <- vals[!is.na(vals)]
-            if(length(vals) >0L){
+          } else if (recode == "colname") {
+            output[i, j] <- new_value
+          } else if (recode == "no") {
+            if (length(competing_cols) == 1L) {
+              output[i, j] <- x[i, which(colnames(x) == competing_cols)]
+            } else{
               best_val <-
                 vals %>%
                 lapply(.,
@@ -136,10 +135,7 @@ RL_crosswalk <-
                 unlist() %>%
                 which.min()
               output[i, j] <- vals[best_val]
-            }else{
-              output[i,j] <- NA
             }
-
           }
         }
       }

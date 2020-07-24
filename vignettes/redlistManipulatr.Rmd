@@ -140,7 +140,9 @@ For more details see `?RL_fetch()`.
 
 `RL_code_fill()` allows filling of Level 1 codes with the maximum suitable corresponding Level 2 code, and filling of blank Level 2 codes with the value of the corresponding Level 1 code.
 
-It takes an input of a wide format `dataframe` (as output by `RL_fetch()`).
+It takes an input of a wide format `dataframe` `x` (as output by `RL_fetch()`).
+
+Note: Running `RL_code_fill()` multiple times will fill out Level 1/Level 2 habitats which only exist because of a previous function call. It is advisable only to run this function once.
 
 Example use:
 

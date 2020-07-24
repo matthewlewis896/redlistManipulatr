@@ -4,10 +4,12 @@
 \alias{RL_elevation_check}
 \title{Checks min/max elevations and recodes if min > max}
 \usage{
-RL_elevation_check(x)
+RL_elevation_check(x, verbose = FALSE)
 }
 \arguments{
 \item{x}{A dataframe in wide or long form, as output by \code{RL_fetch()} and \code{RL_reformat_long()} respectively.}
+
+\item{verbose}{(optional) Logical. Should species with incorrect elevation values be printed out? Defaults to \code{FALSE}.}
 }
 \value{
 A dataframe in the same format as the input.

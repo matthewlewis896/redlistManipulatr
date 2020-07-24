@@ -39,6 +39,8 @@ Optionally fill out Level 2 habitat codes if Level 1 codes exist and vice versa.
 The \code{level1.recode} parameter will fill upstream Level 1 habitat categories if any Level 2 categories have habitat information. e.g. if habitat category 2.1 (Dry Savanna) is suitable and of major importance (coded as 31), habitat category 2 (Savanna) will be filled with this info too.
 
 Similarly, \code{level2.recode} will fill all downstream Level 2 habitat categories if the corresponding Level 1 category is filled. e.g. if if habitat category 2 (Savanna) is suitable and of major importance (coded as 31), habitat categories 2.1 (Dry Savanna) and 2.2 (Moist Savanna) will be given the same information.
+
+NOTE: Running this function multiple times will fill out Level 1/Level 2 habitats which only exist because of a previous function call. It is advisable only to run this function once.
 }
 \author{
 Matt Lewis, \email{matthewlewis896@gmail.com}

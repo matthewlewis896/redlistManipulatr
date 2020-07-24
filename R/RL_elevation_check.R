@@ -3,13 +3,19 @@
 #' @author Matt Lewis, \email{matthewlewis896@@gmail.com}
 
 #' @param x A dataframe in wide or long form, as output by \code{RL_fetch()} and \code{RL_reformat_long()} respectively.
+#' @param verbose (optional) Logical. Should species with incorrect elevation values be printed out? Defaults to \code{FALSE}.
 #' @return A dataframe in the same format as the input.
 #' @export
 
 RL_elevation_check <-
   function(
-    x
+    x,
+    verbose = FALSE
   ){
+    if(!is.logical(verbose)){
+      stop("Please supply a valid logical value for 'verbose'.")
+    }
+
     min_alt <-
       x$min_alt %>%
       as.character() %>%
@@ -25,8 +31,24 @@ RL_elevation_check <-
     alts_to_change <-
       which(delta_alt <= 0)
 
-    x$min_alt[alts_to_change] = -99999
-    x$max_alt[alts_to_change] <- 99999
+    if(length(alts_to_change) >0L){
+      if(verbose == TRUE){
+        species_to_change <-
+          x[alts_to_change,c("iucn_id", "binomial")]
+        message("The following species have had elevations changed:\n")
+        print(species_to_change)
+      }
+
+      x$min_alt[alts_to_change] = -99999
+      x$max_alt[alts_to_change] <- 99999
+    }else{
+      if(verbose == TRUE){
+        message("No species have had elevations changed.")
+      }
+
+    }
+
+
 
     return(x)
   }
