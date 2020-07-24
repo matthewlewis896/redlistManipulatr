@@ -69,7 +69,8 @@ RL_crosswalk <-
       gsub("_", ".", .)
 
     new_colnames <-
-      lut[,new.col]
+      lut[,new.col] %>%
+      unique()
 
     output <-
       matrix(
@@ -123,17 +124,22 @@ RL_crosswalk <-
           if(length(competing_cols) == 1L) {
             output[i, j] <- x[i, which(colnames(x) == competing_cols)]
           } else{
-            vals <- x[i, which(colnames(x) == competing_cols)]
+            vals <- x[i, which(colnames(x) %in% competing_cols)]
             vals <- vals[!is.na(vals)]
-            best_val <-
-              vals %>%
-              lapply(.,
-                     function(z) {
-                       which(pref_order == z)
-                     }) %>%
-              unlist() %>%
-              which.min()
-            output[i, j] <- vals[best_val]
+            if(length(vals) >0L){
+              best_val <-
+                vals %>%
+                lapply(.,
+                       function(z) {
+                         which(pref_order == z)
+                       }) %>%
+                unlist() %>%
+                which.min()
+              output[i, j] <- vals[best_val]
+            }else{
+              output[i,j] <- NA
+            }
+
           }
         }
       }
