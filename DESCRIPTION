@@ -1,12 +1,17 @@
 Package: redlistManipulatr
 Title: Obtain Red List habitat and elevation data and manipulate formats
 Version: 0.3.3
-Authors@R: 
+Authors@R: c(
     person(given = "Matthew",
            family = "Lewis",
            role = c("aut", "cre"),
            email = "matthewlewis896@gmail.com",
-           comment = c(ORCID = "0000-0003-2244-4078"))
+           comment = c(ORCID = "0000-0003-2244-4078")),
+    person(given = "Andy",
+            family = "Arnell",
+            role = "aut",
+            email = "andy.arnell@unep-wcmc.org",
+            comment = c(ORCID = "0000-0002-3360-5861")))
 Description: A collection of functions used to pull and manipulate IUCN Red List habitat and elevation data.
 License: MIT + file LICENSE
 Encoding: UTF-8
