@@ -59,7 +59,7 @@ threats_par <-
       .options.snow = opts,
       .packages = c("rredlist")#packages needing maintaining in this loop
     ) %dopar% {
-      #Let's see how many of 5 seasons we can fill - output df in the form we want
+
       df <- temp_df
       #what species we after
       species <- as.character(x[i])
@@ -90,7 +90,7 @@ threats_par <-
           df<-df[1,]
           df$code <- "999"
         }
-        if(length(habs$name) ==1L){
+        if(length(habs$name) >0L){
           df[,2] <- unlist(habs$name)
         }
 

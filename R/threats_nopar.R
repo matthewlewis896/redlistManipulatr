@@ -32,7 +32,6 @@ threats_nopar <-
       .combine = rbind,
       .packages = c("rredlist")#packages needing maintaining in this loop
     ) %do% {
-      #Let's see how many of 5 seasons we can fill - output df in the form we want
       df <- temp_df
       #what species we after
       species <- as.character(x[i])
@@ -63,7 +62,7 @@ threats_nopar <-
           df<-df[1,]
           df$code <- "999"
         }
-        if(length(habs$name) ==1L){
+        if(length(habs$name) >0L){
           df[,2] <- unlist(habs$name)
         }
 
