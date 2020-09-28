@@ -1,4 +1,4 @@
-#' Wide format dataframe for RL_fetch()
+#' Wide format dataframe for RL_fetch() opt "habelev"
 #' @description Internal Function. Makes a wide format dataframe to output RL_fetch() into according to the Red List level2 habitats. The number of rows corresponds to the number of seasons coded by the Red List.
 #' @author Matt Lewis, \email{matthewlewis896@@gmail.com}
 #' @keywords internal

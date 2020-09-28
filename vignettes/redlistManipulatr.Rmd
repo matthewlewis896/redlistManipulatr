@@ -337,6 +337,59 @@ pander::pandoc.table(df7[,])
 
 `RL_reformat_wide()` allows reformatting of the output of `RL_reformat_long()` back to wide-format. The parameter `x` is the long-format `dataframe`.
 
+### Obtaining threat info from the Red List
+
+`RL_threats()` obtains threats data from the Red List API.
+
+Species' names or IDs are supplied using the parameter `x`. `x` can be a `vector`, `list`, or `dataframe` of species' names or IUCN IDs (specify which using the parameter `query`). If `x` is a `dataframe`, the additional parameter `col.name` is needed to specify the column name of the species' names/IDs.
+
+An API key for the Red List (`key`) must also be supplied. These are obtainable from https://apiv3.iucnredlist.org/api/v3/token.
+
+A simple example could look like:
+
+``` {r, eval = FALSE}
+# Fetch data from the Red List:
+df8 <- 
+  RL_threats(
+    x = 
+      c(
+        "Panthera leo"
+      ),
+    query = "name",
+    key = "your.api.key"
+  )
+```
+``` {r, echo = FALSE}
+
+df8 <- 
+  RL_threats(
+    x = 
+      c(
+        "Panthera leo"
+      ),
+    query = "name",
+    key = "bcdf6849b4e6df1e0cecaf68490770dff7406cca9ae953a75174947117dd8d79"
+  )
+
+```
+``` {r, echo = FALSE, results = "asis"}
+
+pander::pandoc.table(df8)
+
+```
+
+`RL_threats()` also allows for additional customisation. 
+
+By default it runs in parallel, but this can be altered by setting the parameter `parallel` to `FALSE`. If running in parallel, the number of cores can also be specified manually using `num.cores`.
+
+It can also be tested on a subset of data, set by changing `subset` to the proportion of data desired. 
+
+The duration of sleep between each call to the Red List API can also be manually set using `sleep_dur`.
+
+Finally, there are 3 options for `verbose`. `verbose = 0` gives no progress update, `verbose = 1` gives a progress bar (the default), and `verbose = 2` prints one line for each task completed.
+
+For more details see `?RL_threats()`.
+
 ### Exporting
 
 Whichever outputs want to be exported can then simply be exported as `.csv` files using:

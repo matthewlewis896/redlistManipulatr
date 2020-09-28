@@ -2,7 +2,7 @@
 % Please edit documentation in R/wideform.R
 \name{wideform}
 \alias{wideform}
-\title{Wide format dataframe for RL_fetch()}
+\title{Wide format dataframe for RL_fetch() opt "habelev"}
 \usage{
 wideform(habs = redlistManipulatr::habitats, seas = redlistManipulatr::seasons)
 }
