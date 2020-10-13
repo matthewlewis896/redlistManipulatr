@@ -58,7 +58,7 @@ sp_list <-
 
 ``` {r, echo = FALSE, results = "asis"}
 
-pander::pandoc.table(sp_list[1:10,])
+knitr::kable(sp_list[1:10,])
 
 ```
 
@@ -118,7 +118,7 @@ Seasons are coded as per the Red List, such that `1` is Resident, `2` is Breedin
 
 ``` {r, echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df[,1:18])
+knitr::kable(df[,1:18])
 
 ```
 
@@ -157,7 +157,7 @@ df2 <-
 
 ``` {r, echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df2[,1:18])
+knitr::kable(df2[,1:18])
 
 ```
 
@@ -187,7 +187,7 @@ df3 <-
 
 ``` {r echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df3[,1:18])
+knitr::kable(df3[,1:18])
 
 ```
 
@@ -202,7 +202,7 @@ df3 <-
 
 ``` {r echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df3[,1:18])
+knitr::kable(df3[,1:18])
 
 ```
 
@@ -254,7 +254,7 @@ df4 <-
 
 rownames(df4) <- 1:nrow(df4)
 
-pander::pandoc.table(df4[,1:18])
+knitr::kable(df4[,1:18])
 
 ```
 
@@ -281,7 +281,7 @@ df5 <-
 
 ``` {r, echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df5[,1:18])
+knitr::kable(df5[,1:18])
 
 ```
 
@@ -310,7 +310,7 @@ df6 <-
 
 ``` {r, echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df6[,1:18])
+knitr::kable(df6[,1:18])
 
 ```
 See `?RL_crosswalk()` for more details.
@@ -331,7 +331,7 @@ df7 <-
 
 ``` {r, echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df7[,])
+knitr::kable(df7[,])
 
 ```
 
@@ -374,7 +374,7 @@ df8 <-
 ```
 ``` {r, echo = FALSE, results = "asis"}
 
-pander::pandoc.table(df8)
+knitr::kable(df8)
 
 ```
 

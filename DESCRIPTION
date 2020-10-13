@@ -1,6 +1,6 @@
 Package: redlistManipulatr
 Title: Obtain Red List habitat and elevation data and manipulate formats
-Version: 0.4.3
+Version: 0.4.4
 Authors@R: c(
     person(given = "Matthew",
            family = "Lewis",
@@ -30,9 +30,8 @@ Imports:
     tidyr,
     utils,
     stats,
-    pander,
     tidyselect
-Suggests: 
+Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
