@@ -173,7 +173,7 @@ Some species have seasonal occurrence for a particular habitat missing on the Re
 
 `RL_recode_seasons()` recodes `999` seasons as 'Resident', giving a code of `1` (see the `seasons` data).
 
-As `RL_recode_seasns()` may cause multiple rows for Resident seasons (e.g. if a species has data that is both Resident and missing for season), the parameter `combine.rows` allows combining of these rows. In the case of both rows having suitability values for a habitat, the highest ranked suitability-major importance combination is selected, see `suitability_ordered` for this ranking. As a result, it is recommended to run `RL_recode_suitabilities()` before `RL_recode_seasons()` if both are required, as `999` habitats are low priority. `combine.rows` defaults to `FALSE`.
+As `RL_recode_seasons()` may cause multiple rows for Resident seasons (e.g. if a species has data that is both Resident and missing for season), the parameter `combine.rows` allows combining of these rows. In the case of both rows having suitability values for a habitat, the highest ranked suitability-major importance combination is selected, see `suitability_ordered` for this ranking. As a result, it is recommended to run `RL_recode_suitabilities()` before `RL_recode_seasons()` if both are required, as `999` habitats are low priority. `combine.rows` defaults to `FALSE`.
 
 `combine.rows = FALSE`: 
 

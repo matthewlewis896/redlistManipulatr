@@ -114,7 +114,7 @@ RL_reformat_long <-
       #major importance text
       if(is.na(df$major_importance[i])){
         df$major_importance_text[i] <- NA
-      }else if(df$major_importance[i] == 3){
+      }else if(df$major_importance[i] %in% c(3,6)){
         df$major_importance_text[i] <- NA
       }else{
         df$major_importance_text[i] <-

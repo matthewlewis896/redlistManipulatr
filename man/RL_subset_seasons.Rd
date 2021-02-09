@@ -36,10 +36,12 @@ RL_subset_seasons(
 A dataframe in wide format (one column per habitat type).
 }
 \description{
-Subset wide format data to species-season combinations. Also allows copying of data for missing desired seasons
+Subset wide format data to species-season combinations. Also allows copying of data for missing desired seasons.
 }
 \details{
 \code{season_df} should have seasons coded numerically as per \code{redlistManipulatr::seasons$Code}.
+
+If the data for a season doesn't exist on the RedList (e.g. a bird may have breeding season and non-breeding season data but no data for resident), then \code{fill.missing.seasons} lets you say which seasons you want to copy data from. This can include any of the Red List season codes - for instance \code{fill.missing.seasons = c(1,2,5)} would mean that for a season we're missing data for, we look at the data (if it exists) for the \code{resident}, \code{breeding season}, and \code{seasonal occurrence uncertain} seasons and select the most suitable combination - e.g. if \code{resident} has habitat 1.2 as \code{suitable} \code{major importance Yes} and \code{breeding season} has it as \code{marginal} \code{major importance No} then we take the value from \code{resident} because it has a higher suitability.
 }
 \author{
 Matt Lewis, \email{matthewlewis896@gmail.com}
