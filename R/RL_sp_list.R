@@ -12,7 +12,7 @@
 RL_sp_list <-
   function(
     key,
-    retain.taxonomic.info = FALSE,
+    retain.taxonomic.info = "some",
     retain.population = FALSE,
     retain.category = TRUE
   ){
