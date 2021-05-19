@@ -6,7 +6,7 @@
 \usage{
 RL_sp_list(
   key,
-  retain.taxonomic.info = FALSE,
+  retain.taxonomic.info = "some",
   retain.population = FALSE,
   retain.category = TRUE
 )
