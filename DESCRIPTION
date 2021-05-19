@@ -1,6 +1,6 @@
 Package: redlistManipulatr
 Title: Obtain Red List habitat and elevation data and manipulate formats
-Version: 0.4.5
+Version: 0.4.6
 Authors@R: c(
     person(given = "Matthew",
            family = "Lewis",

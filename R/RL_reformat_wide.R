@@ -23,6 +23,7 @@ RL_reformat_wide <-
       temp[,c(1:which(colnames(temp) == "max_alt"))] <-
         sub[1,c(1:which(colnames(temp) == "max_alt"))]
       for(j in 1:n.seasons){
+        temp[j, "season"] <- unique(sub$season)[j]
         sub2 <- sub[sub$season == unique(sub$season)[j],]
         for(k in 1:nrow(sub2)){
           val <- paste0(sub2$suitability[k], sub2$major_importance[k])
