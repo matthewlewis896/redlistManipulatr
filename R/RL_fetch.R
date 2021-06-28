@@ -71,7 +71,15 @@ RL_fetch <-
       stop("Please supply a valid value for 'query'. 'query' should be between a character input.")
     }else if(!(query %in% c("name", "ID"))){
       stop("Please supply a valid value for 'query'. 'query' should be between a character input of 'name' or 'ID'.")
+    }else if(query == "ID" & class(x) == "integer"){
+      x <- x %>%
+        as.character() %>%
+        as.numeric()
+    }else if(query == "name" & class(x) == "integer"){
+      x <- x %>%
+        as.character()
     }
+
 
     if(is.numeric(num.cores) == FALSE){
       stop("Please supply a valid number of cores as an integer number.")
@@ -83,27 +91,42 @@ RL_fetch <-
 
     message("Using Red List version ", rredlist::rl_version(key = key))
     # Getting data (parallel or not)
-
-    if(parallel == TRUE){
-      df <- fetch_par(
-        x = x,
-        key = key,
-        query = query,
-        subset = subset,
-        sleep_dur = sleep_dur,
-        num.cores = num.cores,
-        verbose =verbose
-      )
-    }else{
-      df <- fetch_nopar(
-        x = x,
-        key = key,
-        query = query,
-        subset = subset,
-        sleep_dur = sleep_dur,
-        verbose =verbose
-      )
+    ### TODO Fix subset from 99 batch subset
+    df <- list()
+    batches <- c(seq(0, subset, 99), subset)
+    for(a in 1:(length(batches) - 1)) {
+      batch <- (batches[a] + 1):batches[a + 1]
+      batch_to_run <- batch
+      batch_to_run <- batch_to_run - diff(c(1, batch_to_run[1]))
+      message("Fetching ",length(batch),  " data records for batch number ",   a,  " of ", (length(batches) - 1))
+      if (parallel == TRUE) {
+        df[[a]] <-
+          fetch_par(
+            x = x[batch],
+            key = key,
+            query = query,
+            subset = batch_to_run,#subset,
+            sleep_dur = sleep_dur,
+            num.cores = num.cores,
+            verbose = verbose
+          )
+      } else{
+        df[[a]] <-
+          fetch_nopar(
+            x = x[batch],
+            key = key,
+            query = query,
+            subset = batch_to_run,#subset,
+            sleep_dur = sleep_dur,
+            verbose = verbose
+          )
+      }
     }
-    df <- as.data.frame(df)
+    df <-
+      df %>%
+      do.call(what = "rbind") %>%
+      #tidyr::drop_na("iucn_id") %>%
+      as.data.frame()
+
     return(df)
   }

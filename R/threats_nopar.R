@@ -28,7 +28,7 @@ threats_nopar <-
     temp_df <- threatform()
 
     ret <- foreach::foreach (
-      i = 1:subset,
+      i = subset,
       .combine = rbind,
       .packages = c("rredlist")#packages needing maintaining in this loop
     ) %do% {

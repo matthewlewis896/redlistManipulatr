@@ -29,7 +29,7 @@ threats_par <-
           cat(sprintf("task %d is complete\n", n))#print when each row is complete
       opts <- list(progress = progress)
     } else if (verbose == 1){
-      pb <- txtProgressBar(style = 3)
+      pb <- txtProgressBar(style = 3, max = length(subset))
       progress <- function(n) setTxtProgressBar(pb, n)
       opts <- list(progress = progress)
     }else{
@@ -54,7 +54,7 @@ threats_par <-
     temp_df <- threatform()
 
     ret <- foreach::foreach (
-      i = 1:subset,
+      i = subset,
       .combine = rbind,
       .options.snow = opts,
       .packages = c("rredlist")#packages needing maintaining in this loop
