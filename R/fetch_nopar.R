@@ -36,7 +36,7 @@ fetch_nopar <-
     }
 
     ret <- foreach::foreach (
-      i = 1:subset,
+      i = subset,
       .combine = rbind,
       .packages = c("rredlist")#packages needing maintaining in this loop
     ) %do% {
@@ -56,7 +56,7 @@ fetch_nopar <-
         if(length(habs$result)>0){
 
           habs$result$season <- tolower(as.character(habs$result$season))
-          habs$result$season[habs$result$season == "unknown"] <- "seasonal occurrence unknown"
+          habs$result$season[habs$result$season %in% c("unknown", "seasonal occurrence unknown")] <- "seasonal occurrence uncertain"
 
           habs$result$suitability <- tolower(as.character(habs$result$suitability))
 

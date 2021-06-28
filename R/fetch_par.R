@@ -29,7 +29,7 @@ fetch_par <-
           cat(sprintf("task %d is complete\n", n))#print when each row is complete
       opts <- list(progress = progress)
     } else if (verbose == 1){
-      pb <- txtProgressBar(style = 3)
+      pb <- txtProgressBar(style = 3, max = length(subset))
       progress <- function(n) setTxtProgressBar(pb, n)
       opts <- list(progress = progress)
     }else{
@@ -62,7 +62,7 @@ fetch_par <-
     major_importance <- redlistManipulatr::major_importance
 
     ret <- foreach::foreach (
-      i = 1:subset,
+      i = subset,
       .combine = rbind,
       .options.snow = opts,
       .packages = c("rredlist")#packages needing maintaining in this loop
@@ -83,7 +83,7 @@ fetch_par <-
         if(length(habs$result)>0){
 
           habs$result$season <- tolower(as.character(habs$result$season))
-          habs$result$season[habs$result$season == "unknown"] <- "seasonal occurrence unknown"
+          habs$result$season[habs$result$season %in% c("unknown", "seasonal occurrence unknown")] <- "seasonal occurrence uncertain"
 
           habs$result$suitability <- tolower(as.character(habs$result$suitability))
 
