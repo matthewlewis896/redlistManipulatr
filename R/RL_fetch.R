@@ -91,7 +91,6 @@ RL_fetch <-
 
     message("Using Red List version ", rredlist::rl_version(key = key))
     # Getting data (parallel or not)
-    ### TODO Fix subset from 99 batch subset
     df <- list()
     batches <- c(seq(0, subset, 99), subset)
     for(a in 1:(length(batches) - 1)) {
