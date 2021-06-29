@@ -39,7 +39,7 @@ RL_reformat_long <-
       )
 
     if(na.rm == TRUE){
-      df <- df[!is.na(df$suitability),]
+      df <- df[!is.na(df$suitability) & df$suitability != 66,]
     }
 
     df$level_3 <-
