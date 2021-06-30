@@ -88,7 +88,7 @@ RL_threats <-
       batch <- (batches[a] + 1):batches[a + 1]
       batch_to_run <- batch
       batch_to_run <- batch_to_run - diff(c(1, batch_to_run[1]))
-      message("Fetching ",length(batch),  " data records for batch number ",   a,  " of ", (length(batches) - 1))
+      message("\nFetching ",length(batch),  " data records for batch number ",   a,  " of ", (length(batches) - 1))
       if (parallel == TRUE) {
         df[[a]] <-
           threats_par(
