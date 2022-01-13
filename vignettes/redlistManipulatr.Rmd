@@ -214,7 +214,7 @@ Sometimes a species on the Red List will have minimum elevation > maximum elevat
 
 This works on any wide-format `dataframe` or a long-format `dataframe` (from `RL_reformat_long()`).
 
-See `?RL_elevation_check()` for more details.
+See `?RL_elevation_check()` for more details and other options.
 
 ### Subsetting to desired seasons
 
