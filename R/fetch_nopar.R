@@ -32,7 +32,7 @@ fetch_nopar <-
       sort()
 
     if(verbose == 1){
-      pb = txtProgressBar(min = 0, max = subset, initial = 0, style = 3)
+      pb = txtProgressBar(min = 0, max = length(subset), initial = 0, style = 3)
     }
 
     ret <- foreach::foreach (
