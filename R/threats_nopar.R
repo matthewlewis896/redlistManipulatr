@@ -22,7 +22,7 @@ threats_nopar <-
 
 
     if(verbose == 1){
-      pb = txtProgressBar(min = 0, max = subset, initial = 0, style = 3)
+      pb = txtProgressBar(min = 0, max = length(subset), initial = 0, style = 3)
     }
 
     temp_df <- threatform()
